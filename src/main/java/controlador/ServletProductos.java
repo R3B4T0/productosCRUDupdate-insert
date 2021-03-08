@@ -19,7 +19,7 @@ import java.util.List;
  * @author DAW2-PROFESOR
  */
 public class ServletProductos extends HttpServlet {
-
+    private int id;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,6 +72,27 @@ public class ServletProductos extends HttpServlet {
                 if ( ProductosCRUD.destroyProducto(id)>0 ) {
                     out.println("<h1>Registro Borrado " + "<a href='index.jsp'>Volver</a>" + "</h1>");
                 }
+                 
+            }
+            
+            if ( op.equals("update1")) { //cuando le indicamos que vaya a borrar
+                id = Integer.parseInt(request.getParameter("id"));
+                Productos miProducto = ProductosCRUD.getProducto(id);
+                request.setAttribute("miProducto", miProducto);
+                request.getRequestDispatcher("update.jsp").forward(request, response);
+                 
+            }
+            
+            if ( op.equals("update2")) { //cuando le indicamos que vaya a borrar
+                String nombre = request.getParameter("nombre");
+                String imagen = request.getParameter("imagen");
+                String categoria = request.getParameter("categoria");
+                Float precio = Float.parseFloat(request.getParameter("precio"));
+                Productos miProducto = new Productos(id, nombre, imagen, categoria, precio);
+                int filas = ProductosCRUD.actualizaProducto(miProducto);
+                out.println("<h3>" + filas + " filas actualizadas</h3>");
+//                request.setAttribute("miProducto", miProducto);
+//                request.getRequestDispatcher("update.jsp").forward(request, response);
                  
             }
 
