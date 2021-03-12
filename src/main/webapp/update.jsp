@@ -25,6 +25,13 @@
         <input type="hidden" name="op" required value="update2"> 
         <input type="submit" value="Actualizar" >       
         </form>
+        <script>
+            window.onbeforeunload = confirmExit;
+            function confirmExit()
+            {
+                return "Seguro que quiere salir?";
+            }
+     	</script>
     </body>
 </html>
 
